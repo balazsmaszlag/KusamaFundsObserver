@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  kusamaObserver:
+    image: kusama_observer:v0.0.1
+    build: 
+      context: .
+    ports:
+      - "${KUSAMA_METRICS_ENDPOINT_PORT}:5000"

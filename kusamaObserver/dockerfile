@@ -1,0 +1,21 @@
+FROM node:18.12-alpine AS builder
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm ci
+COPY tsconfig*.json ./
+COPY src src
+COPY env-config.json ./env-config.json
+RUN npm run build
+
+FROM node:18.12-alpine
+ENV NODE_ENV=production
+RUN apk add --no-cache tini
+WORKDIR /usr/src/app
+RUN chown node:node .
+USER node
+COPY package*.json ./
+RUN npm install
+COPY --from=builder /usr/src/app/build/ lib/
+EXPOSE 5000
+ENTRYPOINT [ "/sbin/tini","--", "node", "lib/src/server.js" ]
+#ENTRYPOINT tail -f /dev/null

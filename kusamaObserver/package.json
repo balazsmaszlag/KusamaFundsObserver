@@ -1,0 +1,30 @@
+{
+  "name": "kusama-network-account-obserer",
+  "version": "1.0.0",
+  "description": "The system monitor a list of given accounts and sense if an account runs out of funds (under a configurable threshold)",
+  "main": "src/server.js",
+  "scripts": {
+    "build": "rimraf ./build && tsc",
+    "test": "test",
+    "start:dev": "npx nodemon",
+    "start": "npm run build && node build/src/server.js"
+  },
+  "author": "Balazs Maszlag",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/jest": "^29.2.4",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.11.15",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@polkadot/api": "^9.10.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "prom-client": "^14.1.0"
+  }
+}
